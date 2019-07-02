@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class ProjectItem extends Component {
     render() {
@@ -39,4 +40,8 @@ class ProjectItem extends Component {
     }
 }
 
-export default ProjectItem;
+const mapStateToProps = state => ({
+    projects: state.project
+});
+
+export default connect(mapStateToProps)(ProjectItem);
