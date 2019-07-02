@@ -8,15 +8,22 @@ class AddProject extends Component {
         super();
 
         this.state = {
-            "projectName": "",
-            "projectIdentifier": "",
-            "description": "",
-            "start_date": "",
-            "end_date": ""
+            projectName: "",
+            projectIdentifier: "",
+            description: "",
+            start_date: "",
+            end_date: "",
+            errors: {}
         };
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.errors) {
+            this.setState({errors: nextProps.errors});
+        }
     }
 
     onChange(event) {
@@ -30,8 +37,18 @@ class AddProject extends Component {
     }
 
     render() {
+        const {errors} = this.state;
+
         return (
-            <div className="register">
+            <div className="register">   
+                {
+                    errors ? 
+                    <div>
+                        <h4>{errors.description}</h4>
+                <h4>{errors.projectName}</h4>
+                <h4>{errors.projectIdentifier}</h4></div> : null
+                }  
+                
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
@@ -95,7 +112,12 @@ class AddProject extends Component {
 }
 
 AddProject.propTypes = {
-    createProject: PropTypes.func.isRequired
-}
+    createProject: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired
+};
 
-export default connect(null, { createProject })(AddProject);
+const mapStateToProps = state => ({
+    errors: state.errors
+});
+
+export default connect(mapStateToProps, { createProject })(AddProject);
