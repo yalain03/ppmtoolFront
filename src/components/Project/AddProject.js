@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createProject } from '../../actions/projectActions';
+import classnames from 'classnames';
 
 class AddProject extends Component {
     constructor() {
@@ -41,14 +42,6 @@ class AddProject extends Component {
 
         return (
             <div className="register">   
-                {
-                    errors ? 
-                    <div>
-                        <h4>{errors.description}</h4>
-                <h4>{errors.projectName}</h4>
-                <h4>{errors.projectIdentifier}</h4></div> : null
-                }  
-                
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
@@ -58,29 +51,45 @@ class AddProject extends Component {
                                 <div className="form-group">
                                     <input 
                                         type="text" 
-                                        className="form-control form-control-lg " 
+                                        className={classnames("form-control form-control-lg", {
+                                            "is-invalid": errors.projectName
+                                        })} 
                                         placeholder="Project Name"
                                         name="projectName"
                                         value={this.state.projectName}
                                         onChange={this.onChange} />
+                                        {errors.projectName && (
+                                            <div className="invalid-feedback">{errors.projectName}</div>
+                                        )}
                                 </div>
                                 <div className="form-group">
                                     <input 
                                         type="text" 
-                                        className="form-control form-control-lg" 
+                                        className={classnames("form-control form-control-lg", {
+                                            "is-invalid": errors.projectIdentifier
+                                        })} 
                                         placeholder="Unique Project ID"
                                         name="projectIdentifier"
                                         onChange={this.onChange}
                                     />
+                                    {errors.projectIdentifier && (
+                                            <div className="invalid-feedback">{errors.projectIdentifier}</div>
+                                        )}
                                 </div>
                                 {/* <!-- disabled for Edit Only!! remove "disabled" for the Create operation --> */}
                                 <div className="form-group">
                                     <textarea 
-                                        className="form-control form-control-lg" 
+                                        className={classnames("form-control form-control-lg", {
+                                            "is-invalid": errors.description
+                                        })}
                                         placeholder="Project Description"
                                         name="description"
                                         value={this.state.description}
-                                        onChange={this.onChange}></textarea>
+                                        onChange={this.onChange}
+                                        ></textarea>
+                                        {errors.description && (
+                                            <div className="invalid-feedback">{errors.description}</div>
+                                        )}
                                 </div>
                                 <h6>Start Date</h6>
                                 <div className="form-group">
