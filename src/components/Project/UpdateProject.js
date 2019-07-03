@@ -23,6 +23,10 @@ class UpdateProject extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        if(nextProps.errors) {
+            this.setState({errors: nextProps.errors});
+        }
+        
         const {
             id,
             projectName,
@@ -144,7 +148,8 @@ class UpdateProject extends Component {
 UpdateProject.proptTypes = {
     getProject: PropTypes.func.isRequired,
     createProject: PropTypes.func.isRequired,
-    project: PropTypes.object.isRequired
+    project: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
