@@ -22,7 +22,7 @@ function App() {
           <Route exact path="/updateProject/:id" component={UpdateProject} />
           <Route exact path="/projectBoard/:id" component={ProjectBoard} />
           <Route exact path="/projectTask/:id" component={AddProjectTask} />
-          <Redirect from="/" to="/dashboard" />
+          {/* <Redirect from="/" to="/dashboard" /> */}
         </div>
       </Router>
     </Provider>
