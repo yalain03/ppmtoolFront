@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Backlog from './Backlog';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getBacklog } from '../../actions/backlogActions';
+import { getBacklog, deleteProjectTask } from '../../actions/backlogActions';
 
 class ProjectBoard extends Component {
     constructor() {
@@ -68,6 +68,7 @@ class ProjectBoard extends Component {
 
 ProjectBoard.propTypes = {
     getBacklog: PropTypes.func.isRequired,
+    deleteProjectTask: PropTypes.func.isRequired,
     backlog: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 }
@@ -77,4 +78,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 });
 
-export default connect(mapStateToProps, { getBacklog })(ProjectBoard);
+export default connect(mapStateToProps, { getBacklog, deleteProjectTask })(ProjectBoard);

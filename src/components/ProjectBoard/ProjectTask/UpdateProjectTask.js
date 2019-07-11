@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getProjectTask, updateProjectTask } from '../../../actions/backlogActions';
+import { getProjectTask } from '../../../actions/backlogActions';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -163,7 +163,6 @@ class UpdateProjectTask extends Component {
 
 UpdateProjectTask.propTypes = {
     getProjectTask: PropTypes.func.isRequired,
-    updateProjectTask: PropTypes.func.isRequired,
     project_task: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 };
@@ -173,4 +172,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 });
 
-export default connect(mapStateToProps, { getProjectTask, updateProjectTask })(UpdateProjectTask);
+export default connect(mapStateToProps, { getProjectTask })(UpdateProjectTask);
